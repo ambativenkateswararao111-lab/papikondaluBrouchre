@@ -20,11 +20,17 @@
   --shadow: 0 10px 26px rgba(15, 47, 36, 0.12);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--text-dark);
   background: #d9d2bf;
   line-height: 1.55;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1, h2, h3 {
@@ -149,7 +155,7 @@ ul { list-style: none; }
 /* ================= COVER PAGE ================= */
 .cover-page {
   padding: 0;
-  height: 640px;
+  min-height: 640px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -201,7 +207,10 @@ ul { list-style: none; }
   color: #e7efe9;
 }
 .cover-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin-top: 24px;
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.4);
@@ -210,7 +219,9 @@ ul { list-style: none; }
   font-weight: 600;
   font-size: 0.9rem;
   backdrop-filter: blur(3px);
+  max-width: 100%;
 }
+.cover-pill i { font-style: normal; opacity: 0.7; }
 .cover-footer {
   position: relative;
   z-index: 1;
@@ -309,12 +320,11 @@ ul { list-style: none; }
   break-inside: avoid;
 }
 .stop-img {
-  width: 240px;
+  width: 100%;
   height: 170px;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
-  flex-shrink: 0;
 }
 .stop-img img {
   width: 100%;
@@ -403,7 +413,7 @@ ul { list-style: none; }
   padding-top: 30px;
 }
 .stay-strip-img {
-  width: 240px;
+  width: 100%;
   height: 170px;
   border-radius: var(--radius);
   overflow: hidden;
@@ -471,17 +481,78 @@ ul { list-style: none; }
 }
 
 /* ================= RESPONSIVE (screen) ================= */
+
+/* Tablets */
 @media (max-width: 900px) {
   .page { padding: 40px 26px; margin: 0 10px 22px; }
   .overview-grid { grid-template-columns: 1fr; }
   .food-grid { grid-template-columns: 1fr; }
-  .stop { grid-template-columns: 1fr; }
-  .stop-img { width: 100%; height: 220px; }
-  .stay-strip { grid-template-columns: 1fr; }
-  .stay-strip-img { width: 100%; height: 220px; }
-  .day-page-header { flex-direction: column; align-items: flex-start; }
+  .stop { grid-template-columns: 220px 1fr; }
+  .stay-strip { grid-template-columns: 220px 1fr; }
+  .day-page-header { gap: 14px; }
   .meal-badge { margin-left: 0; }
+  .cover-content { padding: 70px 30px 0; }
+  .cover-footer { justify-content: center; gap: 16px 24px; }
+}
+
+/* Phones (portrait tablets / large phones) */
+@media (max-width: 680px) {
+  .topbar { padding: 14px 5%; }
   .topbar-inner { flex-direction: column; gap: 12px; }
+  .btn { width: 100%; justify-content: center; }
+  .brand { font-size: 1.05rem; }
+
+  .page { padding: 32px 20px; margin: 0 8px 20px; }
+
+  .cover-page { min-height: 0; }
+  .cover-content { padding: 40px 18px 0; }
+  .cover-logo { width: 60px; height: 60px; margin-bottom: 12px; }
+  .cover-content h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+  .cover-sub { font-size: 0.9rem; margin-top: 12px; }
+  .cover-pill {
+    flex-direction: column;
+    gap: 2px;
+    border-radius: 16px;
+    padding: 12px 20px;
+    font-size: 0.82rem;
+    margin-top: 18px;
+  }
+  .cover-pill i { display: none; }
+  .cover-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 8px;
+    text-align: center;
+    padding: 16px;
+    font-size: 0.78rem;
+  }
+
+  .overview-meals { flex-direction: column; align-items: center; }
+
+  .day-num { font-size: 2.4rem; }
+  .day-page-header { flex-direction: column; align-items: flex-start; }
+  .meal-badge { align-self: flex-start; }
+
+  .stop { grid-template-columns: 1fr; gap: 14px; }
+  .stop-img { width: 100%; height: 200px; }
+
+  .stay-strip { grid-template-columns: 1fr; gap: 14px; text-align: center; }
+  .stay-strip-img { width: 100%; height: 200px; margin: 0 auto; }
+
+  .back-page { padding: 50px 22px; }
+  .contact-row { flex-direction: column; align-items: stretch; }
+  .contact-row a { text-align: center; word-break: break-word; }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+  .page { padding: 26px 14px; margin: 0 6px 16px; }
+  .cover-content h1 { font-size: 1.6rem; }
+  .cover-tag { font-size: 0.68rem; padding: 5px 12px; }
+  .day-num { font-size: 2rem; }
+  .stop-img { height: 170px; }
+  .stay-strip-img { height: 170px; }
+  .food-card, .overview-card { padding: 20px 16px; }
 }
 
 /* ================= PRINT / PDF ================= */
